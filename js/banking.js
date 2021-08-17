@@ -117,12 +117,19 @@ function updateAmount(amountId, newAmount) {
     currentAmountText.innerText = totalAmount;
 
 }
+//function for getting the current balance
+function currentBalance() {
+    const currentTotalBalanceText = document.getElementById('bank-balance');
+
+    const currentTotalBalanceNumber = parseFloat(currentTotalBalanceText.innerText);
+    return currentTotalBalanceNumber;
+}
 //function for updating the balance
 function updateBalance(newAmount, addBalance) {
-    //getting the balance
+
     const currentTotalBalanceText = document.getElementById('bank-balance');
-    //converting it to number
-    const currentTotalBalanceNumber = parseFloat(currentTotalBalanceText.innerText);
+
+    const currentTotalBalanceNumber = currentBalance();//practising nested function
     if (addBalance == true) {
         //adding the new amount with current balance and change the current balance
         currentTotalBalanceText.innerText = newAmount + currentTotalBalanceNumber;
@@ -141,15 +148,33 @@ function updateBalance(newAmount, addBalance) {
 document.getElementById('deposit-btn').addEventListener('click', function () {
 
     const newDeposit = getInput('deposit-input');
-    updateAmount('deposit-amnt', newDeposit);
-    updateBalance(newDeposit, true)
+    //adding some error handlers,it has to be a positive number
+    if (newDeposit > 0) {
+        updateAmount('deposit-amnt', newDeposit);//updates deposit field
+        updateBalance(newDeposit, true);//updates balance field
+    }
+    else {
+        alert('Please enter valid number');
+    }
 
-})
+
+});
 
 //adding event handler to withdraw button
 document.getElementById('withdraw-btn').addEventListener('click', function () {
 
     const newWithdraw = getInput('withdraw-input');
-    updateAmount('withdraw-amnt', newWithdraw);
-    updateBalance(newWithdraw, false);
-})
+    //adding some error handlers. it has to be a positive number and withdrwal can not exceed current balance
+    const balance = currentBalance();//getting the current balance
+
+    if (newWithdraw > 0 && balance >= newWithdraw) {
+        updateAmount('withdraw-amnt', newWithdraw);//updates withdraw field
+        updateBalance(newWithdraw, false);//updates balance field
+    }
+    else if (balance < newWithdraw) {
+        alert('Your balance exceeded. You do not have enough money')
+    }
+    else {
+        alert('Please enter valid number')
+    }
+});
