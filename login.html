@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login page</title>
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <header>
+        <h1 class="text-6xl text-center font-semibold mt-16">Welcome to <span class="text-indigo-600">Swiss
+                bank</span>!!!</h1>
+    </header>
+    <main>
+        <section class="bg-green-100 w-3/4 mx-auto p-8 mt-8 rounded">
+            <h3 class="text-2xl mb-4">Please Login</h3>
+
+            <!-- normally we have to use form -->
+            <!-- but for now just using div (not proper way) -->
+            <div>
+                <input id="email" class="block border border-gray-400 rounded w-3/4 mb-4 px-2" type="text"
+                    placeholder="Enter email">
+                <input class="block border border-gray-400 rounded w-3/4 mb-4 px-2" type="password" name=""
+                    id="password" placeholder="Enter password">
+
+                <button id="login-btn" class="px-4 py-1 bg-yellow-600 rounded text-white font-medium">Login</button>
+            </div>
+        </section>
+
+    </main>
+
+    <script src="js/login.js"></script>
+</body>
+
+</html>
