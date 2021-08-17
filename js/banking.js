@@ -103,19 +103,31 @@ document.getElementById('withdraw-btn').addEventListener('click', function () {
 //function for getting the input
 function getInput(inputFieldId) {
     const inputField = document.getElementById(inputFieldId);
-    const input = parseFloat(inputField.value);
+    const inputAmount = parseFloat(inputField.value);
     inputField.value = '';
-    return input;
+    return inputAmount;
+}
+
+//function for getting the current amount
+function currentAmount(amountId, newAmount) {
+    const currentAmountText = document.getElementById(amountId);
+    const currentAmountNumber = parseFloat(currentAmountText.innerText);
+
+    const totalAmount = currentAmountNumber + newAmount;
+    currentAmountText.innerText = totalAmount;
+
 }
 
 //adding event handler to the deoposit button
 document.getElementById('deposit-btn').addEventListener('click', function () {
 
     const newDeposit = getInput('deposit-input');
+    currentAmount('deposit-amnt', newDeposit);
 
 })
 
 //adding event handler to withdraw button
 document.getElementById('withdraw-btn').addEventListener('click', function () {
+
     const newWithdraw = getInput('withdraw-input');
 })
