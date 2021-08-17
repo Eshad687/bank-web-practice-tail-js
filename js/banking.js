@@ -108,8 +108,8 @@ function getInput(inputFieldId) {
     return inputAmount;
 }
 
-//function for getting the current amount
-function currentAmount(amountId, newAmount) {
+//function for  adding the new amount and updating the amount
+function updateAmount(amountId, newAmount) {
     const currentAmountText = document.getElementById(amountId);
     const currentAmountNumber = parseFloat(currentAmountText.innerText);
 
@@ -117,12 +117,32 @@ function currentAmount(amountId, newAmount) {
     currentAmountText.innerText = totalAmount;
 
 }
+//function for updating the balance
+function updateBalance(newAmount, addBalance) {
+    //getting the balance
+    const currentTotalBalanceText = document.getElementById('bank-balance');
+    //converting it to number
+    const currentTotalBalanceNumber = parseFloat(currentTotalBalanceText.innerText);
+    if (addBalance == true) {
+        //adding the new amount with current balance and change the current balance
+        currentTotalBalanceText.innerText = newAmount + currentTotalBalanceNumber;
+    } else {
+        //reduce the current balance as per withdrawl and change the current balance
+        currentTotalBalanceText.innerText = currentTotalBalanceNumber - newAmount;
+    }
+
+
+
+
+}
+
 
 //adding event handler to the deoposit button
 document.getElementById('deposit-btn').addEventListener('click', function () {
 
     const newDeposit = getInput('deposit-input');
-    currentAmount('deposit-amnt', newDeposit);
+    updateAmount('deposit-amnt', newDeposit);
+    updateBalance(newDeposit, true)
 
 })
 
@@ -130,4 +150,6 @@ document.getElementById('deposit-btn').addEventListener('click', function () {
 document.getElementById('withdraw-btn').addEventListener('click', function () {
 
     const newWithdraw = getInput('withdraw-input');
+    updateAmount('withdraw-amnt', newWithdraw);
+    updateBalance(newWithdraw, false);
 })
